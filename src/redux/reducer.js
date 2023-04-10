@@ -1,4 +1,4 @@
-import { ADDTASK, COMPLETETASK, DELETETASK } from "./actiontype"
+import { ADDTASK, COMPLETETASK, DELETETASK, EDITTASK, FILTER } from "./actiontype"
 
 
 
@@ -17,7 +17,13 @@ export const taskreducer = (state=init,{type,payload})=>{
             return{
                 ...state,todos: state.todos.map(el=>el.id===payload?{...el,isDone:!el.isDone}:el)
             }
-            
+        case EDITTASK:
+            return{
+                ...state,todos: state.todos.map(el=>el.id===payload.id?payload:el)
+            }
+        case FILTER:
+            return{
+                 ...state, filter: !state.filter }
             
     default:
       return state

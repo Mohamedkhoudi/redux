@@ -3,11 +3,12 @@ import { useSelector } from 'react-redux'
 import CardTodo from './CardTodo'
 
 const AddAct = () => {
-    const {todos}=useSelector(state=>state)
+    const {todos,filter}=useSelector((state)=>state)
   return (
     <div>
       {
-        React.Children.toArray(todos.map(el=><CardTodo todo={el}/>))
+        filter?todos.filter((el)=>el.isDone===false).map((el)=><CardTodo todo={el} key={el.id}/>)
+        :todos.map((el)=><CardTodo todo={el} key={el.id}/>)
       }
     </div>
   )
